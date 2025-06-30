@@ -1,13 +1,29 @@
+import { NavLink } from 'react-router-dom'
+
 function Navbar() {
+  const linkClass = ({ isActive }) =>
+    `hover:text-white/80 ${isActive ? 'text-white' : 'text-white/90'}`
+
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-blue-600">🏠 Housing AI</h1>
+    <header className="bg-gradient-to-r from-blue-600 to-indigo-600 shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+        <h1 className="text-xl font-bold text-white">
+          <NavLink to="/">🏠 Housing AI</NavLink>
+        </h1>
         <nav className="hidden sm:block">
-          <ul className="flex space-x-4 text-sm text-gray-700 font-medium">
-            <li><a href="#" className="hover:text-blue-600">Accueil</a></li>
-            <li><a href="#" className="hover:text-blue-600">Annonces</a></li>
-            <li><a href="#" className="hover:text-blue-600">Contact</a></li>
+          <ul className="flex space-x-6 text-sm font-medium">
+            <li>
+              <NavLink to="/" className={linkClass}>Accueil</NavLink>
+            </li>
+            <li>
+              <NavLink to="/annonces" className={linkClass}>Annonces</NavLink>
+            </li>
+            <li>
+              <NavLink to="/contact" className={linkClass}>Contact</NavLink>
+            </li>
+            <li>
+              <NavLink to="/register" className={linkClass}>S'inscrire</NavLink>
+            </li>
           </ul>
         </nav>
       </div>
