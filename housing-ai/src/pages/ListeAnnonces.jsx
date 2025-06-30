@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import LogementCard from '../components/logementcard'
+import LogementCard from '../components/LogementCard'
 
 const ListeAnnonces = () => {
   const [annonces, setAnnonces] = useState([])
@@ -12,8 +12,8 @@ const ListeAnnonces = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="min-h-screen bg-gray-50 py-10 px-4">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {annonces.map(annonce => (
           <LogementCard
             key={annonce.id}

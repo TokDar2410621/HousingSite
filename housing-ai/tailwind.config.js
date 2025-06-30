@@ -1,7 +1,7 @@
 import lineClamp from '@tailwindcss/line-clamp'
 
 export default {
-  content: [],
+  content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: { extend: {} },
   plugins: [lineClamp],
 }

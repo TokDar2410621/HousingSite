@@ -42,7 +42,8 @@ const Register = () => {
 }
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white shadow-xl rounded-lg p-6">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+      <div className="w-full max-w-md bg-white shadow-xl rounded-lg p-6">
       <h2 className="text-2xl font-semibold mb-4 text-center">Créer un compte</h2>
 
       {message && <div className="text-green-600 mb-4">{message}</div>}
@@ -69,6 +70,7 @@ const Register = () => {
           S'inscrire
         </button>
       </form>
+      </div>
     </div>
   )
 }
