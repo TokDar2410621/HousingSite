@@ -7,7 +7,11 @@ const ListeAnnonces = () => {
 
   useEffect(() => {
     axios.get('http://localhost:8000/api/annonces/')
-      .then(res => setAnnonces(res.data))
+      .then((res) =>{
+
+      console.log("✅ Annonces :", res.data)
+      setAnnonces(res.data)
+      })
       .catch(err => console.error("Erreur API :", err))
   }, [])
 

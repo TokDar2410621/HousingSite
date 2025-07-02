@@ -7,6 +7,8 @@ from login_signin.utils import verify_email_token
 from .serializers import RegisterSerializer, ProfileUpdateSerializer, PasswordChangeSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 class RegisterView(APIView):
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
@@ -18,9 +20,10 @@ class RegisterView(APIView):
             return Response({"message": "Utilisateur créé avec succès"}, status=status.HTTP_201_CREATED)
         print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
 class ProfileView(APIView):
     permission_classes = [IsAuthenticated]
+    @swagger_auto_schema(operation_summary="Afficher le profil de l'utilisateur")
     def get(self, request):
         user = request.user
         return Response({
@@ -39,10 +42,10 @@ class LogoutView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
-
 class ProfileUpdateView(APIView):
     permission_classes = [IsAuthenticated]
 
+    @swagger_auto_schema(request_body=ProfileUpdateSerializer, operation_summary="Mettre à jour le profil")
     def put(self, request):
         user = request.user
         serializer = ProfileUpdateSerializer(user, data=request.data, partial=True)

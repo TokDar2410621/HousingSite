@@ -24,13 +24,15 @@ from rest_framework_simplejwt.views import (
 )
 
 router = DefaultRouter()
-router.register(r'annonces', AnnonceViewSet)
+#router.register(r'annonces', AnnonceViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/annonces/', include(router.urls)),  # Annonces uniquement ici
+    path('api/annonces/', include('annonces.urls')),  # Annonces uniquement ici
     path('api/', include('login_signin.urls')), 
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # login
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('accounts/', include('allauth.urls')),
 ]
 
 # Documentation
@@ -39,15 +41,16 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
 schema_view = get_schema_view(
-   openapi.Info(
-      title="Housing AI API",
-      default_version='v1',
-      description="Documentation de l'API",
-      terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@housingai.local"),
-   ),
-   public=True,
-   permission_classes=[permissions.AllowAny],
+    openapi.Info(
+        title="Housing AI API",
+        default_version='v1',
+        description="Documentation de l'API",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="contact@housingai.local"),
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny],
+    authentication_classes=[],  # important pour éviter Basic Auth
 )
 
 urlpatterns += [

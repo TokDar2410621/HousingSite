@@ -22,7 +22,9 @@ class RegisterSerializer(serializers.ModelSerializer):
 class ProfileUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['email']  # Ajoute d'autres champs si besoin
+        fields = ['email', 'first_name', 'last_name', 'photo']
+        read_only_fields = ['email']
+ # Ajoute d'autres champs si besoin
 class PasswordChangeSerializer(serializers.Serializer):
     old_password = serializers.CharField(write_only=True)
     new_password = serializers.CharField(write_only=True)
