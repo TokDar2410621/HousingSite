@@ -1,0 +1,9 @@
+Django
+djangorestframework
+djangorestframework-simplejwt
+django-cors-headers
+drf-yasg
+django-allauth
+requests
+itsdangerous
+Pillow
