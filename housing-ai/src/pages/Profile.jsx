@@ -14,7 +14,7 @@ const Profile = () => {
           headers: { Authorization: `Bearer ${tokens.access}` },
         })
         setProfile(res.data)
-      } catch (err) {
+      } catch {
         setError("Impossible de charger le profil")
       }
     }
