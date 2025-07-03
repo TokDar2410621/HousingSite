@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios'
+import axios from '../axios'
 
 const Register = () => {
   const [email, setEmail] = useState('')
@@ -13,32 +13,25 @@ const Register = () => {
   setError('')
 
   try {
-    const response = await axios({
-      method: 'post',
-      url: 'http://localhost:8000/api/register/',
-      data: {
-        email,
-        password
-      },
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    console.log("✅ Réponse :", response)
+    const response = await axios.post(
+      'register/',
+      { email, password },
+      { headers: { 'Content-Type': 'application/json' } }
+    )
     setMessage(response.data.message || 'Inscription réussie.')
     setEmail('')
     setPassword('')
   } catch (err) {
-  console.error("Erreur API :", err.response?.data)
+    let errorMsg = "Erreur lors de l'inscription."
 
-  if (err.response?.data?.password) {
-    setError(err.response.data.password.join(' '))
-  } else if (err.response?.data?.error) {
-    setError(err.response.data.error)
-  } else {
-    setError("Erreur lors de l'inscription.")
+    if (err.response?.data?.password) {
+      errorMsg = err.response.data.password.join(' ')
+    } else if (err.response?.data?.error) {
+      errorMsg = err.response.data.error
+    }
+
+    setError(errorMsg)
   }
-}
 }
 
   return (
