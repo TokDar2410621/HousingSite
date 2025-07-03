@@ -5,6 +5,8 @@ import Home from './pages/Home'
 import ListeAnnonces from './pages/ListeAnnonces'
 import Contact from './pages/Contact'
 import Register from './pages/register'
+import Profile from './pages/Profile'
+import PrivateRoute from './components/PrivateRoute'
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
             <Route path="/annonces" element={<ListeAnnonces />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/register" element={<Register />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/profile" element={<Profile />} />
+            </Route>
           </Routes>
         </main>
 

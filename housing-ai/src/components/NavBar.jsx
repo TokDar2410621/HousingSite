@@ -24,6 +24,9 @@ function Navbar() {
             <li>
               <NavLink to="/register" className={linkClass}>S'inscrire</NavLink>
             </li>
+            <li>
+              <NavLink to="/profile" className={linkClass}>Profil</NavLink>
+            </li>
           </ul>
         </nav>
       </div>
