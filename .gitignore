@@ -20,3 +20,24 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Database files
+/db.sqlite3
+
+# Media uploads
+/media/
+
+# Node dependencies
+/node_modules/
+
+# Backup files
+*~
+
+# Virtual environment directories
+venv/
+.venv/
+env/
+*/env/
