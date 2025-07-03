@@ -1,8 +1,18 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { AuthContext } from '../contexts/AuthContext'
 
 function Navbar() {
+  const { isAuthenticated, logout } = useContext(AuthContext)
+  const navigate = useNavigate()
+
   const linkClass = ({ isActive }) =>
     `hover:text-white/80 ${isActive ? 'text-white' : 'text-white/90'}`
+
+  const handleLogout = () => {
+    logout()
+    navigate('/')
+  }
 
   return (
     <header className="bg-gradient-to-r from-blue-600 to-indigo-600 shadow-sm">
@@ -21,9 +31,25 @@ function Navbar() {
             <li>
               <NavLink to="/contact" className={linkClass}>Contact</NavLink>
             </li>
-            <li>
-              <NavLink to="/register" className={linkClass}>S'inscrire</NavLink>
-            </li>
+            {isAuthenticated ? (
+              <>
+                <li>
+                  <NavLink to="/profile" className={linkClass}>Mon profil</NavLink>
+                </li>
+                <li>
+                  <button onClick={handleLogout} className="text-white/90 hover:text-white/80">Se déconnecter</button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <NavLink to="/login" className={linkClass}>Se connecter</NavLink>
+                </li>
+                <li>
+                  <NavLink to="/register" className={linkClass}>S'inscrire</NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </div>
