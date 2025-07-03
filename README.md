@@ -21,7 +21,7 @@ Ce projet regroupe un backend Django pour la logique serveur et un frontend Reac
 cd Housing_AI
 python -m venv venv
 source venv/bin/activate
-pip install django djangorestframework drf-yasg djangorestframework-simplejwt corsheaders
+pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
