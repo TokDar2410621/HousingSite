@@ -1,6 +1,9 @@
+
 import { useState, useContext } from 'react'
 import { AuthContext } from '../contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import axios from '../axios'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -8,15 +11,37 @@ const Login = () => {
   const [error, setError] = useState('')
   const { login } = useContext(AuthContext)
   const navigate = useNavigate()
+  const [token, setToken] = useState('')
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
+
     try {
       await login(email, password)
       navigate('/profile')
     } catch (err) {
       setError("Erreur d'authentification")
+    setToken('')
+
+    try {
+      const response = await axios.post(
+        'token/',
+        { email, password },
+        { headers: { 'Content-Type': 'application/json' } }
+      )
+      setToken(response.data.access)
+      setEmail('')
+      setPassword('')
+    } catch (err) {
+      let errorMsg = "Erreur lors de la connexion."
+      if (err.response?.data?.detail) {
+        errorMsg = err.response.data.detail
+      } else if (err.response?.data?.error) {
+        errorMsg = err.response.data.error
+      }
+      setError(errorMsg)
     }
   }
 
@@ -24,6 +49,10 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md bg-white shadow-xl rounded-lg p-6">
         <h2 className="text-2xl font-semibold mb-4 text-center">Se connecter</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-center">Connexion</h2>
+        {token && (
+          <div className="text-green-600 mb-4 break-all">Token : {token}</div>
+        )}
         {error && <div className="text-red-600 mb-4">{error}</div>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
@@ -43,6 +72,10 @@ const Login = () => {
             required
           />
           <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+          >
             Se connecter
           </button>
         </form>

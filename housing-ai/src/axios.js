@@ -1,6 +1,6 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: "http://localhost:8000/api/",
-  withCredentials: false,  // True si tu utilises l’authentification par cookie
+  baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: false, // True si tu utilises l’authentification par cookie
 });

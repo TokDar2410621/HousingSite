@@ -33,3 +33,15 @@ cd housing-ai
 npm install
 npm run dev
 ```
+
+## Configuration
+
+Le frontend utilise la variable d'environnement `VITE_API_URL` pour savoir
+où joindre l'API. Un fichier `.env.example` est disponible dans `housing-ai/`
+avec la valeur par défaut :
+
+```bash
+VITE_API_URL=http://localhost:8000/api/
+```
+
+Copiez ce fichier en `.env` et ajustez l'URL selon votre environnement.
