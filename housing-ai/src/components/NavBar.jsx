@@ -6,12 +6,12 @@ function Navbar() {
 
   return (
     <header className="bg-gradient-to-r from-blue-600 to-indigo-600 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-white">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 py-2 sm:py-4 flex items-center justify-between">
+        <h1 className="text-lg sm:text-xl font-bold text-white">
           <NavLink to="/">🏠 Housing AI</NavLink>
         </h1>
         <nav className="hidden sm:block">
-          <ul className="flex space-x-6 text-sm font-medium">
+          <ul className="flex space-x-4 md:space-x-6 text-xs sm:text-sm font-medium">
             <li>
               <NavLink to="/" className={linkClass}>Accueil</NavLink>
             </li>
